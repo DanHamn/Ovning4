@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SkalProj_Datastrukturer_Minne
 {
@@ -72,12 +73,58 @@ namespace SkalProj_Datastrukturer_Minne
              * Below you can see some inspirational code to begin working.
             */
 
-            //List<string> theList = new List<string>();
-            //string input = Console.ReadLine();
-            //char nav = input[0];
-            //string value = input.substring(1);
+            //Prompt input from user
+            Console.WriteLine("Enter input for the list.\n" +
+                "Start with '+' to add and '-' to remove.\n" +
+                "Enter '0' to exit");
 
-            //switch(nav){...}
+            //Creates the list and the bool used to quite the while loop
+            List<string> theList = new List<string>();
+            bool exit = false;
+
+            while (exit == false)
+            {
+                string input = Console.ReadLine();
+                //Puts the first character into 'nav' to be used in the switch
+                char nav = input[0];
+                //Puts the input except for the fist character into 'value' as a string
+                string value = input.Substring(1);
+
+                switch (nav)
+                {
+                    case '+':
+                        //Adds 'value' to list
+                        theList.Add(value);
+                        WriteList(theList);
+                        break;
+
+                    case '-':
+                        //Remove 'value' from list
+                        theList.Remove(value);
+                        WriteList(theList);
+                        break;
+
+                    case '0':
+                        //Exits back to Main()
+                        exit = true;
+                        break;
+
+                    default:
+                        //Handles incorrect input 
+                        Console.WriteLine("Please start the string with either '+' or '-', or use '0' to exit");
+                        break;
+                }
+            }
+        }
+
+        private static void WriteList(List<string> theList)
+        {
+            //This code provides the output for ExamineList()
+            Console.WriteLine("\tThe List contains:");
+            Console.WriteLine("\t" + String.Join(", ", theList.ToArray()));
+            Console.WriteLine($"\tThe number of elements in the list is: {theList.Count}");
+            Console.WriteLine($"\tThe capacity of the list is: {theList.Capacity}");
+            Console.WriteLine("Give new input with '+' or '-', or '0' to exit");
         }
 
         /// <summary>
