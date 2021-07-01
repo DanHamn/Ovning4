@@ -73,6 +73,9 @@ namespace SkalProj_Datastrukturer_Minne
              * Below you can see some inspirational code to begin working.
             */
 
+            //Todo: Add answeres to questions
+
+
             //Prompt input from user
             Console.WriteLine("Enter input for the list.\n" +
                 "Start with '+' to add and '-' to remove.\n" +
@@ -137,6 +140,17 @@ namespace SkalProj_Datastrukturer_Minne
              * Create a switch with cases to enqueue items or dequeue items
              * Make sure to look at the queue after Enqueueing and Dequeueing to see how it behaves
             */
+            Queue<string> queue = new Queue<string>();
+            queue.Enqueue("Kalle");
+            queue.Enqueue("Carl");
+            queue.Enqueue("Kjell");
+
+            foreach (var pers in queue)
+            {
+                Console.WriteLine(pers);
+            }
+
+
         }
 
         /// <summary>
