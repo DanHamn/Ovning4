@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SkalProj_Datastrukturer_Minne
 {
@@ -81,39 +82,31 @@ namespace SkalProj_Datastrukturer_Minne
                 "Start with '+' to add and '-' to remove.\n" +
                 "Enter '0' to exit");
 
-            //Creates the list and the bool used to quite the while loop
-            List<string> theList = new List<string>();
-            bool exit = false;
+            List<string> theList = new List<string>(); //Creates the list
+            bool exit = false; //Creates the bool for stopping the while loop
 
             while (exit == false)
             {
                 string input = Console.ReadLine();
-                //Puts the first character into 'nav' to be used in the switch
-                char nav = input[0];
-                //Puts the input except for the fist character into 'value' as a string
-                string value = input[1..];
 
-                switch (nav)
+                switch (input[0]) //Uses the first char in input for the switch
                 {
                     case '+':
-                        //Adds 'value' to list
-                        theList.Add(value);
+                        theList.Add(input[1..]); //Adds the input except for the fist character to the list
                         WriteList(theList);
                         break;
 
                     case '-':
-                        //Remove 'value' from list
-                        theList.Remove(value);
+                        theList.Remove(input[1..]); //Removes the input except for the fist character from the list
                         WriteList(theList);
                         break;
 
                     case '0':
-                        //Exits back to Main()
-                        exit = true;
+
+                        exit = true; //Exits back to Main()
                         break;
 
-                    default:
-                        //Handles incorrect input 
+                    default: //Handles incorrect input
                         Console.WriteLine("Please start the string with either '+' or '-', or use '0' to exit");
                         break;
                 }
@@ -154,31 +147,25 @@ namespace SkalProj_Datastrukturer_Minne
             {
                 string input = Console.ReadLine();
                 //Puts the first character into 'nav' to be used in the switch
-                char nav = input[0];
                 //Puts the input except for the fist character into 'value' as a string
-                string value = input[1..];
 
-                switch (nav)
+                switch (input[0]) //Uses the first char in input for the switch
                 {
                     case '+':
-                        //Enqueues 'value' to list
-                        queue.Enqueue(value);
+                        queue.Enqueue(input[1..]); //Enqueues the input except for the fist character to the queue
                         WriteQueue(queue);
                         break;
 
                     case '-':
-                        //Dequeues the first element from list
-                        queue.Dequeue();
+                        queue.Dequeue(); //Dequeues the oldest element enqueued to the queue
                         WriteQueue(queue);
                         break;
 
-                    case '0':
-                        //Exits back to Main()
+                    case '0': //Exits back to Main()
                         exit = true;
                         break;
 
-                    default:
-                        //Handles incorrect input 
+                    default: //Handles incorrect input 
                         Console.WriteLine("Please start the string with either '+' or '-', or use '0' to exit");
                         break;
                 }
@@ -203,10 +190,11 @@ namespace SkalProj_Datastrukturer_Minne
              * Create a switch with cases to push or pop items
              * Make sure to look at the stack after pushing and and poping to see how it behaves
             */
+
             //Prompt input from user
             Console.WriteLine("Enter input for the stack.\n" +
                 "Start with '+' to push and just '-' to pop.\n" +
-                "Start with '<' to start ReverseText() " +
+                "Start with '<' to start ReverseText().\n" +
                 "Enter '0' to exit");
 
             //Creates the stack, and the bool used to quite the while loop
@@ -216,41 +204,41 @@ namespace SkalProj_Datastrukturer_Minne
             while (exit == false)
             {
                 string input = Console.ReadLine();
-                //Puts the first character into 'nav' to be used in the switch
-                char nav = input[0];
-                //Puts the input except for the fist character into 'value' as a string
-                string value = input[1..];
 
-                switch (nav)
+                switch (input[0])
                 {
                     case '+':
-                        //Push 'value' to list
-                        stack.Push(value);
+                        stack.Push(input[1..]); //Push 'value' to list
                         WriteStack(stack);
                         break;
 
                     case '-':
-                        //Pop the last element from list
-                        stack.Pop();
+                        stack.Pop(); //Pop the newest element from list
                         WriteStack(stack);
                         break;
                     case '<':
-                        ReverseText(value);
+                        ReverseText(input[1..]);
                         break;
 
-                    case '0':
-                        //Exits back to Main()
+                    case '0': //Exits back to Main()
                         exit = true;
                         break;
 
-                    default:
-                        //Handles incorrect input 
+                    default: //Handles incorrect input
                         Console.WriteLine("Please start the string with either '+' or '-', or use '0' to exit");
                         break;
                 }
             }
         }
 
+
+        private static void WriteStack(Stack<string> stack)
+        {
+            //This code provides the output for ExamineStack()
+            Console.WriteLine("\tThe Queue contains:");
+            Console.WriteLine("\t" + String.Join(", ", stack.ToArray()));
+            Console.WriteLine("Give new input starting with '+', '-' or '<', or '0' to exit");
+        }
         private static void ReverseText(string value)
         {
             Stack<char> stack = new Stack<char>();
@@ -259,14 +247,6 @@ namespace SkalProj_Datastrukturer_Minne
                 stack.Push(character);
             }
             Console.WriteLine(String.Join("", stack.ToArray()));
-            Console.WriteLine("Give new input with '+', '-' or '<', or '0' to exit");
-        }
-
-        private static void WriteStack(Stack<string> stack)
-        {
-            //This code provides the output for ExamineStack()
-            Console.WriteLine("\tThe Queue contains:");
-            Console.WriteLine("\t" + String.Join(", ", stack.ToArray()));
             Console.WriteLine("Give new input with '+', '-' or '<', or '0' to exit");
         }
 
@@ -279,8 +259,65 @@ namespace SkalProj_Datastrukturer_Minne
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
              */
 
+            //Prompt input from user
+            Console.WriteLine("Enter input with some paranthesises to check if it is well-shaped.");
+            string input = Console.ReadLine();
+            (bool check, Stack<char> stack, char character) = Check(input);
+
+            if (check)
+            {
+                Console.WriteLine("The string was well-formed");
+            }
+            else
+            {
+                if (character !=' ')
+                {
+                    Console.WriteLine($"The string was not well-formed. There was a {character} missplaced");
+                }
+                else
+                {
+                    Console.WriteLine($"The string was not well-formed. There was some additional {String.Join(", ", stack.ToArray())}");
+                }
+
+            }
         }
 
+        private static (bool, Stack<char>, char character) Check(string input)
+        {
+            Dictionary<char, char> paranthisDict = new Dictionary<char, char>
+            { { ')', '(' },
+                { ']', '[' },
+                { '}', '{' }
+            };
+
+            Stack<char> stackParanthis = new Stack<char>();
+
+            for (int i = 0; i < input.Length; i++)
+            {
+                char character = input[i];
+                if (character == '(' || character == '[' || character == '{')
+                {
+                    stackParanthis.Push(character);
+                }
+                else if (character == ')' || character == ']' || character == '}')
+                {
+                    if (stackParanthis.Pop() != paranthisDict[character])
+                    {
+                        return (false, stackParanthis, character);
+
+                    }
+                }
+            }
+            if (stackParanthis.Any())
+            {
+                return (false, stackParanthis, ' ');
+            }
+            else
+            {
+                return (true, stackParanthis, ' ');
+
+            }
+        }
     }
 }
 
