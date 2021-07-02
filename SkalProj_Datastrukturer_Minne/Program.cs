@@ -91,7 +91,7 @@ namespace SkalProj_Datastrukturer_Minne
                 //Puts the first character into 'nav' to be used in the switch
                 char nav = input[0];
                 //Puts the input except for the fist character into 'value' as a string
-                string value = input.Substring(1);
+                string value = input[1..];
 
                 switch (nav)
                 {
@@ -140,17 +140,57 @@ namespace SkalProj_Datastrukturer_Minne
              * Create a switch with cases to enqueue items or dequeue items
              * Make sure to look at the queue after Enqueueing and Dequeueing to see how it behaves
             */
+
+            //Prompt input from user
+            Console.WriteLine("Enter input for the queue.\n" +
+                "Start with '+' to Enqueue and just '-' to Dequeue.\n" +
+                "Enter '0' to exit");
+
+            //Creates the queue and the bool used to quite the while loop
             Queue<string> queue = new Queue<string>();
-            queue.Enqueue("Kalle");
-            queue.Enqueue("Carl");
-            queue.Enqueue("Kjell");
+            bool exit = false;
 
-            foreach (var pers in queue)
+            while (exit == false)
             {
-                Console.WriteLine(pers);
+                string input = Console.ReadLine();
+                //Puts the first character into 'nav' to be used in the switch
+                char nav = input[0];
+                //Puts the input except for the fist character into 'value' as a string
+                string value = input[1..];
+
+                switch (nav)
+                {
+                    case '+':
+                        //Enqueues 'value' to list
+                        queue.Enqueue(value);
+                        WriteQueue(queue);
+                        break;
+
+                    case '-':
+                        //Dequeues the first element from list
+                        queue.Dequeue();
+                        WriteQueue(queue);
+                        break;
+
+                    case '0':
+                        //Exits back to Main()
+                        exit = true;
+                        break;
+
+                    default:
+                        //Handles incorrect input 
+                        Console.WriteLine("Please start the string with either '+' or '-', or use '0' to exit");
+                        break;
+                }
             }
+        }
 
-
+        private static void WriteQueue(Queue<string> queue)
+        {
+            //This code provides the output for ExamineQueue()
+            Console.WriteLine("\tThe Queue contains:");
+            Console.WriteLine("\t" + String.Join(", ", queue.ToArray()));
+            Console.WriteLine("Give new input with '+' or '-', or '0' to exit");
         }
 
         /// <summary>
@@ -163,7 +203,73 @@ namespace SkalProj_Datastrukturer_Minne
              * Create a switch with cases to push or pop items
              * Make sure to look at the stack after pushing and and poping to see how it behaves
             */
+            //Prompt input from user
+            Console.WriteLine("Enter input for the stack.\n" +
+                "Start with '+' to push and just '-' to pop.\n" +
+                "Start with '<' to start ReverseText() " +
+                "Enter '0' to exit");
+
+            //Creates the stack, and the bool used to quite the while loop
+            Stack<string> stack = new Stack<string>();
+            bool exit = false;
+
+            while (exit == false)
+            {
+                string input = Console.ReadLine();
+                //Puts the first character into 'nav' to be used in the switch
+                char nav = input[0];
+                //Puts the input except for the fist character into 'value' as a string
+                string value = input[1..];
+
+                switch (nav)
+                {
+                    case '+':
+                        //Push 'value' to list
+                        stack.Push(value);
+                        WriteStack(stack);
+                        break;
+
+                    case '-':
+                        //Pop the last element from list
+                        stack.Pop();
+                        WriteStack(stack);
+                        break;
+                    case '<':
+                        ReverseText(value);
+                        break;
+
+                    case '0':
+                        //Exits back to Main()
+                        exit = true;
+                        break;
+
+                    default:
+                        //Handles incorrect input 
+                        Console.WriteLine("Please start the string with either '+' or '-', or use '0' to exit");
+                        break;
+                }
+            }
         }
+
+        private static void ReverseText(string value)
+        {
+            Stack<char> stack = new Stack<char>();
+            foreach (char character in value)
+            {
+                stack.Push(character);
+            }
+            Console.WriteLine(String.Join("", stack.ToArray()));
+            Console.WriteLine("Give new input with '+', '-' or '<', or '0' to exit");
+        }
+
+        private static void WriteStack(Stack<string> stack)
+        {
+            //This code provides the output for ExamineStack()
+            Console.WriteLine("\tThe Queue contains:");
+            Console.WriteLine("\t" + String.Join(", ", stack.ToArray()));
+            Console.WriteLine("Give new input with '+', '-' or '<', or '0' to exit");
+        }
+
 
         static void CheckParanthesis()
         {
