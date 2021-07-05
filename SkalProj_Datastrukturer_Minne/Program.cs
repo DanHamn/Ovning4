@@ -57,6 +57,7 @@ namespace SkalProj_Datastrukturer_Minne
                         Pharanthesis.CheckParanthesis();
                         break;
                     case '5':
+                        Recursive.CheckRecursive();
                         break;
                     /*
                  * Extend the menu to include the recursive 
@@ -73,5 +74,7 @@ namespace SkalProj_Datastrukturer_Minne
         }
 
     }
+
+
 }
 
