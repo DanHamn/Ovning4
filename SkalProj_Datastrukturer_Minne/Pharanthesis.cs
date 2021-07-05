@@ -16,6 +16,7 @@ namespace SkalProj_Datastrukturer_Minne
 
             //Prompt input from user
             Console.WriteLine("Enter input with some paranthesises to check if it is well-shaped.");
+            Console.WriteLine("'0': Exit to main");
             bool exit = false;
             while (exit == false)
             {
@@ -52,10 +53,9 @@ namespace SkalProj_Datastrukturer_Minne
                 }
                 else if (character == ')' || character == ']' || character == '}')
                 {
-                    if (stackParanthis.Pop() != paranthisDict[character])
+                    if (stackParanthis.Count == 0 || stackParanthis.Pop() != paranthisDict[character])
                     {
                         return (false, stackParanthis, character);
-
                     }
                 }
             }
@@ -79,7 +79,7 @@ namespace SkalProj_Datastrukturer_Minne
             {
                 if (character != ' ')
                 {
-                    Console.WriteLine($"The \"{input}\" string was not well-formed. There was a {character} missplaced or a missing paranthis needed to ckose the string.");
+                    Console.WriteLine($"The \"{input}\" string was not well-formed. There was a {character} missplaced or a missing paranthis needed to close the string.");
                 }
                 else
                 {
