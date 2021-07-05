@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace SkalProj_Datastrukturer_Minne
 {
-    class Pharanthesis
+    public class Pharanthesis
     {
-        public void CheckParanthesis()
+        public static void CheckParanthesis()
         {
             /*
              * Use this method to check if the paranthesis in a string is Correct or incorrect.

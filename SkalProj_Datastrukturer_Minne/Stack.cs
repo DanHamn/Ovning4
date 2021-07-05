@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace SkalProj_Datastrukturer_Minne
 {
-    internal class Stack
+    public class Stack
     {
 
         /// <summary>
         /// Examines the datastructure Stack
         /// </summary>
-        public void ExamineStack()
+        public static void ExamineStack()
         {
             /*
              * Loop this method until the user inputs something to exit to main menue.

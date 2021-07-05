@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace SkalProj_Datastrukturer_Minne
 {
-    internal class Queue
+    public class Queue
     {
         /// <summary>
         /// Examines the datastructure Queue
         /// </summary>
-        public void ExamineQueue()
+        public static void ExamineQueue()
         {
             /*
              * Loop this method untill the user inputs something to exit to main menue.
